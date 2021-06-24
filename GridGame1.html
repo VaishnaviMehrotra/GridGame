@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridGame</title>
+    <style>
+        * {
+            background-color: teal;
+        }
+        
+        table {
+            margin: 2em auto;
+            width: 500px;
+            height: 500px;
+            border: 0.2em solid black;
+            /* border-collapse: collapse; */
+        }
+        
+        tr {
+            border: 2px solid black;
+            padding: 2em;
+            width: 20px;
+            height: 20px;
+        }
+        
+        td {
+            padding: 1em;
+            width: 30px;
+            height: 30px;
+            border: 2px solid black;
+            font-size: 2em;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="table">
+    </table>
+</body>
+<script>
+    function createTable() {
+        let table = document.getElementById("table");
+        var value = [];
+        for (let count = 1; count <= 100;) {
+            var num = Math.floor((Math.random() * 100) + 1);
+            if (count === 1) {
+                value.push(num);
+                count += 1;
+            } else {
+                var isPresent = false;
+                for (var k = 0; k < value.length; k++) {
+                    if (num === value[k]) {
+                        isPresent = true;
+                        break;
+                    }
+                }
+                console.log(k);
+                if (!isPresent) {
+                    value.push(num);
+                    count += 1;
+                }
+            }
+        }
+        for (let q = 0; q < 10; q++) {
+            let tr = document.createElement("tr");
+            table.appendChild(tr);
+            for (let j = 0; j < 10; j++) {
+                let td = document.createElement("td");
+                tr.appendChild(td);
+                var cell = value.shift();
+                td.innerText = cell;
+            }
+        }
+    }
+    createTable();
+</script>
+
+</html>

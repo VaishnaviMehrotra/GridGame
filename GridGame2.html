@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridGame</title>
+    <style>
+        * {
+            background-color: teal;
+        }
+        
+        table {
+            margin: 2em auto;
+            width: 500px;
+            height: 500px;
+            border: 0.2em solid black;
+            /* border-collapse: collapse; */
+        }
+        
+        tr {
+            border: 2px solid black;
+            padding: 2em;
+            width: 20px;
+            height: 20px;
+        }
+        
+        td {
+            padding: 1em;
+            width: 30px;
+            height: 30px;
+            border: 2px solid black;
+            font-size: 2em;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="table">
+    </table>
+</body>
+<script>
+    function createTable() {
+        var table = document.getElementById("table");
+        var value = [];
+        var count = 1;
+        for (; count <= 100;) {
+            var num = Math.floor((Math.random() * 100) + 1);
+
+            if (count === 1) {
+                value.push(num);
+                count += 1;
+            } else {
+                var isPresent = false;
+                for (var k = 0; k < value.length; k++) {
+                    if (num === value[k]) {
+                        isPresent = true;
+                        break;
+                    }
+                }
+                //console.log(k);
+                if (!isPresent) {
+                    value.push(num);
+                    count += 1;
+                }
+            }
+        }
+        for (var q = 0; q < 10; q++) {
+            let tr = document.createElement("tr");
+            table.appendChild(tr);
+            var b = 1;
+            for (var j = 0; j < 10; j++) {
+                let td = document.createElement("td");
+                td.id = b;
+                tr.appendChild(td);
+                var a = value.shift();
+                td.innerText = a;
+                b++;
+                td.addEventListener('click', (event) => {
+                    //console.log(event.target.innerText);
+                    var val = event.target.innerText;
+                    for (let m = 0; m < table.rows.length; m++) {
+                        for (let l = 0; l < table.rows[m].cells.length; l++) {
+                            if (table.rows[m].cells[l].innerText % val === 0) {
+                                table.rows[m].cells[l].innerText = "*";
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }
+    createTable();
+</script>
+
+</html>

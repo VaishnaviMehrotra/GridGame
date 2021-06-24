@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            background-color: teal;
+        }
+        table{
+            margin: 2em auto;
+            width:500px;
+            height:500px;
+            border: 0.2em solid black;
+            /* border-collapse: collapse; */
+        }
+        tr{
+            border: 2px solid black;
+            padding:2em;
+            width:20px;
+            height: 20px; 
+        }
+        td{
+            padding: 1em;
+            width:30px;
+            height: 30px;
+            border:2px solid black;
+            font-size: 2em;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <table id="table">
+    </table>
+</body>
+<script>
+    function createTable(){
+        var table=document.getElementById("table");
+        var count=1;
+        for(var i=0;i<10;i++){
+            let tr=document.createElement("tr");
+            table.appendChild(tr);
+            for(var j=0;j<10;j++){
+                let td=document.createElement("td");
+                td.id=count;
+                tr.appendChild(td);
+                td.innerText=count;
+                count++;
+            }
+        }
+    }
+    createTable();
+</script>
+</html>
